@@ -20,6 +20,7 @@ class CommentCrudController extends AbstractCrudController
         return Comment::class;
     }
 
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

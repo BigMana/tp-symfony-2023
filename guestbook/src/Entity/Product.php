@@ -20,9 +20,15 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $Categorys = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString(): string
+    {
+        return $this->Product;
     }
 
     public function getProduct(): ?string
