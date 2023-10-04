@@ -20,24 +20,6 @@ class CategoryCrudController extends AbstractCrudController
         return Category::class;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-            ->setEntityLabelInSingular('Product Category')
-            ->setEntityLabelInPlural('Product Category')
-            ->setSearchFields(['author', 'text', 'email'])
-            ->setDefaultSort(['createdAt' => 'DESC'])
-        ;
-    }
-
-public function configureFilters(Filters $filters): Filters
-    {
-        return $filters
-            ->add(EntityFilter::new('conference'))
-        ;
-    }
-
-
         public function configureFields(string $pageName): iterable {
         yield AssociationField::new('product');
         yield TextField::new('author');
