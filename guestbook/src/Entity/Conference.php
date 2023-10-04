@@ -6,6 +6,7 @@ use App\Repository\ConferenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 class Conference implements \Stringable
@@ -27,7 +28,7 @@ class Conference implements \Stringable
     #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique : true)]
     private ?string $slug = null;
 
     public function __construct()
@@ -44,6 +45,14 @@ class Conference implements \Stringable
     {
         return $this->id;
     }
+
+    public function computeSlug(SluggerInterface $slugger)
+    {
+        if (!$this->slug || '-' === $this->slug) {
+            $this->slug = (string) $slugger->slug((string) $this)->lower();
+        }
+    }
+
 
     public function getCity(): ?string
     {
