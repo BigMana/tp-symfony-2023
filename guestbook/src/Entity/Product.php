@@ -87,5 +87,4 @@ class Product implements \Stringable
 
         return $this;
     }
-
 }

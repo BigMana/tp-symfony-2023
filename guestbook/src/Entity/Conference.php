@@ -40,7 +40,7 @@ class Conference implements \Stringable
     {
         return $this->city.' '.$this->year;
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,7 +52,6 @@ class Conference implements \Stringable
             $this->slug = (string) $slugger->slug((string) $this)->lower();
         }
     }
-
 
     public function getCity(): ?string
     {

@@ -7,7 +7,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Comment implements \Stringable
@@ -15,7 +14,6 @@ class Comment implements \Stringable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    
     private ?int $id = null;
 
     #[Assert\NotBlank]
@@ -91,11 +89,13 @@ class Comment implements \Stringable
     {
         return $this->createdAt;
     }
-    
+
     #[ORM\PrePersist]
-    public function setCreatedAtValue()
+    public function setCreatedAtValue(): static
     {
         $this->createdAt = new \DateTimeImmutable();
+
+        return $this;
     }
 
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
